@@ -6,9 +6,8 @@ from dotenv import load_dotenv
 import html
 
 # Загружаем токен и chat_id из .env
-load_dotenv()
-BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
+CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 
 # Константы
 SEARCH_URL = "https://www.olx.kz/elektronika/telefony-i-aksesuary/mobilnye-telefony-smartfony/atyrau/?search%5Bdist%5D=100&search%5Bfilter_float_price:to%5D=55000&search%5Bfilter_enum_mobile_phone_manufacturer%5D%5B0%5D=2065&search%5Bfilter_enum_operating_system%5D%5B0%5D=2"
