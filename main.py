@@ -8,7 +8,7 @@ import html
 # Загружаем токен и chat_id из .env
 load_dotenv()
 BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-CHAT_IDS = os.getenv("TELEGRAM_CHAT_IDS", "").split(",")
+CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 # Константы
 SEARCH_URL = "https://www.olx.kz/elektronika/telefony-i-aksesuary/mobilnye-telefony-smartfony/atyrau/?search%5Bdist%5D=100&search%5Bfilter_float_price:to%5D=55000&search%5Bfilter_enum_mobile_phone_manufacturer%5D%5B0%5D=2065&search%5Bfilter_enum_operating_system%5D%5B0%5D=2"
@@ -58,26 +58,24 @@ def get_latest_ads():
 
 
 def send_telegram_message(text):
-    if not BOT_TOKEN or not CHAT_IDS:
-        print("❌ BOT_TOKEN или CHAT_IDS не заданы!")
+    if not BOT_TOKEN or not CHAT_ID:
+        print("❌ BOT_TOKEN или CHAT_ID не заданы!")
         return
 
-    for chat_id in CHAT_IDS:
-        url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
-        payload = {
-            "chat_id": chat_id.strip(),
-            "text": text,
-            "parse_mode": "HTML",
-            "disable_web_page_preview": True
-        }
+    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+    payload = {
+        "chat_id": CHAT_ID,
+        "text": text,
+        "parse_mode": "HTML",
+        "disable_web_page_preview": True
+    }
 
-        try:
-            response = requests.post(url, data=payload)
-            if response.status_code != 200:
-                print(f"❌ Ошибка Telegram для {chat_id}: {response.text}")
-        except Exception as e:
-            print(f"❌ Ошибка отправки для {chat_id}: {e}")
-
+    try:
+        response = requests.post(url, data=payload)
+        if response.status_code != 200:
+            print(f"❌ Ошибка Telegram: {response.text}")
+    except Exception as e:
+        print(f"❌ Ошибка отправки в Telegram: {e}")
 
 
 def main():
