@@ -2,7 +2,6 @@ import requests
 import time
 from bs4 import BeautifulSoup
 import os
-from dotenv import load_dotenv
 import html
 
 # Загружаем токен и chat_id из .env
@@ -78,6 +77,10 @@ def send_telegram_message(text):
 
 
 def main():
+    print("BOT_TOKEN:", BOT_TOKEN)
+    print("CHAT_ID:", CHAT_ID)
+
+
     seen_links = load_seen()
     print("🔁 Запущен мониторинг новых объявлений...\n")
 
@@ -107,8 +110,6 @@ def main():
 
         time.sleep(CHECK_INTERVAL)
 
-print("BOT_TOKEN:", BOT_TOKEN)
-print("CHAT_ID:", CHAT_ID)
 
 
 
