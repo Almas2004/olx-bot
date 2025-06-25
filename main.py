@@ -107,6 +107,10 @@ def main():
 
         time.sleep(CHECK_INTERVAL)
 
+print("BOT_TOKEN:", BOT_TOKEN)
+print("CHAT_ID:", CHAT_ID)
+
+
 
 if __name__ == "__main__":
     try:
